@@ -15,11 +15,17 @@ class UsersController extends Controller
         $this->user = $user;
     }
 
-    public function index() {
+    public function index(Request $request) {  // 11.23
         $all_users = $this->user->withTrashed()->latest()->paginate(5); // 表示数調整！
         // withTrashed() to include the soft deleted records in query result
+        // $all_users = $this->user->where('name', 'like', '%'.$request->search.'%')->withTrashed()->paginate(5);
+    if ($request->search){
+        //$all_users = $this->user->where('name', 'like', '%'.$request->search.'%')->get();
+        $all_users = $this->user->where('name', 'like', '%'.$request->search.'%')->withTrashed()->paginate(5)->appends(['search' => $request->search]);
+    }
 
-        return view('admin.users.index')->with('all_users', $all_users);
+        return view('admin.users.index')->with('all_users', $all_users)
+                                        ->with('search', $request->search);
     }
 
     // PAGINATION - is the process of dividing a large set of data into pages

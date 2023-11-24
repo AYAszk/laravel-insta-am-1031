@@ -27,6 +27,8 @@
                     </button>
                 </form>
             @endif
+             {{-- INCLUDE THE MODAL HERE --}}
+             @include('users.posts.contents.modals.likes')
             
         </div>
 

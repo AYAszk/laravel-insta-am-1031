@@ -9,4 +9,8 @@ class Like extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function Likes(){ // 11.24
+        $this->belongsTo(User::class);
+    }
 }
