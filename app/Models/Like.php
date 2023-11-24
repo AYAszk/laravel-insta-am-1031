@@ -10,7 +10,8 @@ class Like extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function Likes(){ // 11.24
-        $this->belongsTo(User::class);
+    public function Likes() { // 11.24
+        // This will retrieve the user who liked post
+        return $this->belongsTo(User::class, 'user_id'); // データ参照。
     }
 }

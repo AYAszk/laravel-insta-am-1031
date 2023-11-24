@@ -27,13 +27,17 @@
                     </button>
                 </form>
             @endif
-             {{-- INCLUDE THE MODAL HERE --}}
-             @include('users.posts.contents.modals.likes')
-            
         </div>
 
         <div class="col-auto px-0">
-            <span>{{ $post->likes->count() }}</span>
+            @if ($post->likes->count() == 0 )
+                <span>{{ $post->likes->count() }}</span>
+            @else
+                <button class="btn bg-transparent border-0 ps-0" data-bs-toggle="modal" data-bs-target="#display-likes-{{ $post->id }}">
+                    <span>{{ $post->likes->count() }}</span>
+                </button>
+                @include('users.posts.contents.modals.likes')
+            @endif
         </div>
 
         <div class="col text-end">
